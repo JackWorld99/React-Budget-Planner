@@ -1,5 +1,6 @@
 import { Button, Container, Stack } from "react-bootstrap"
 import BudgetCard from "./components/BudgetCard"
+import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard"
 import AddBudgetModal from "./components/AddBudgetModal"
 import AddExpenseModal from "./components/AddExpenseModal"
 import { useState } from "react"
@@ -30,6 +31,7 @@ function App() {
               <BudgetCard key={budget.id} name={budget.name} amount={amount} max={budget.max} onAddExpenseClick={() => openAddExpenseModal(budget.id)}/>
             )
           })}
+          <UncategorizedBudgetCard onAddExpenseClick={openAddExpenseModal} />
         </div>
       </Container>
 
