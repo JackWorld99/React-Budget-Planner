@@ -1,5 +1,5 @@
 import { Modal, Button, Stack } from "react-bootstrap"
-import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetContext"
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetsContext"
 import { currencyFormatter } from "../utils"
 import { BsFillTrashFill } from "react-icons/bs";
 
