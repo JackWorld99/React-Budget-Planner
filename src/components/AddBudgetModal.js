@@ -1,6 +1,8 @@
 import { Form, Modal, Button } from "react-bootstrap"
 import { useRef } from "react"
 import { useBudgets } from "../contexts/BudgetsContext"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function AddBudgetModal({ show, handleClose }) {
     const nameRef = useRef()
@@ -30,10 +32,10 @@ export default function AddBudgetModal({ show, handleClose }) {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="max">
                         <Form.Label>Maximum Spending</Form.Label>
-                        <Form.Control ref={maxRef} type="number" min={0} step={0.01} required/>
+                        <Form.Control ref={maxRef} type="number" min={0} step={1} required/>
                     </Form.Group>
                     <div className="d-flex justify-content-end">
-                        <Button variant="primary" type="submit"> Add</Button>
+                        <Button variant="primary" type="submit"><FontAwesomeIcon icon={faPlus} /></Button>
                     </div>
                 </Modal.Body>
             </Form>

@@ -1,5 +1,5 @@
-export const currencyFormatter = new Intl.NumberFormat(undefined,{
-    currency:"myr",
+export const currencyFormatter = new Intl.NumberFormat("ms",{
+    currency:"MYR",
     style:"currency",
     minimumFractionDigits:0,
 })
