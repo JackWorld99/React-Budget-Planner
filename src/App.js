@@ -1,16 +1,20 @@
-import { Button, Container, Navbar, Nav, Stack } from "react-bootstrap"
+import { Button, Container, Navbar, Stack } from "react-bootstrap"
 import BudgetCard from "./components/BudgetCard"
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard"
 import AddBudgetModal from "./components/AddBudgetModal"
 import AddExpenseModal from "./components/AddExpenseModal"
 import ViewExpensesModal from "./components/ViewExpensesModal"
 import TotalBudgetCard from "./components/TotalBudgetCard"
+import PrintModal from "./components/PrintModal"
 import { useState } from "react"
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "./contexts/BudgetsContext"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPrint } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+  const [showPrintModal, setShowPrintModal] = useState(false)
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState()
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState()
   const { budgets, getBudgetExpenses } = useBudgets()
@@ -31,6 +35,7 @@ function App() {
             <Stack direction="horizontal" gap="2">
               <Button variant="outline-warning" onClick={() => setShowAddBudgetModal(true)}>Add Budget</Button>
               <Button variant="outline-warning" onClick={openAddExpenseModal}>Add Expense</Button>
+              <Button variant="outline-warning" onClick={() => setShowPrintModal(true)}><FontAwesomeIcon icon={faPrint} /></Button>
             </Stack>
           </Navbar.Collapse>
         </Container> 
@@ -50,6 +55,7 @@ function App() {
       <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
       <AddExpenseModal show={showAddExpenseModal} defaultBudgetId={addExpenseModalBudgetId} handleClose={() => setShowAddExpenseModal(false)} />
       <ViewExpensesModal budgetId={viewExpensesModalBudgetId} handleClose={() => setViewExpensesModalBudgetId()} />
+      <PrintModal show={showPrintModal} handleClose={() => setShowPrintModal(false)} />
     </>
   )
 }
