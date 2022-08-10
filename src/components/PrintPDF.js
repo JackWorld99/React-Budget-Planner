@@ -3,6 +3,10 @@ import { Container, Table, Stack } from "react-bootstrap"
 import { currencyFormatter } from "../utils"
 
 export default function PrintPDF({title, budgets, getBudgetExpenses}) {
+    let total_max = 0
+    let total_amount = 0
+    let total_remain = 0
+
   return (
     <Container className="mx-2">
         <Stack className="my-5">
@@ -28,6 +32,9 @@ export default function PrintPDF({title, budgets, getBudgetExpenses}) {
             <tbody >
                 { budgets.map(budget => {
                     const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0)
+                    total_max += budget.max;
+                    total_amount += amount
+                    total_remain += (budget.max - amount)
                     return (
                         <tr key = {budget.id}>
                             <td>{budget.name}</td>
@@ -37,51 +44,49 @@ export default function PrintPDF({title, budgets, getBudgetExpenses}) {
                         </tr>
                     )
                 })}
+                <tr className="fst-italic fw-bold">
+                    <td>Total</td>
+                    <td>{currencyFormatter.format(total_max)}</td>
+                    <td>{currencyFormatter.format(total_amount)}</td>
+                    <td>{currencyFormatter.format(total_remain)}</td>
+                </tr>
             </tbody>
         </Table>
         { budgets.map(budget => {
             const expenses = getBudgetExpenses(budget.id)
-            const relate_budget =  budgets.find(b => b.id === budget.id)
+            const Total_expenses = expenses.reduce((total, expense) => total + expense.amount, 0)
            return (
-            <>
-                <p className="my-2">Budget Name - {budget.name}</p>
-                <Table >
-                    <thead className="table-primary">
-                        <tr>
-                            <th>Expense categories </th>
-                            <th>Expenses</th>
-                            <th>Remaining Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </>
+                <div key={budget.id}>
+                    {expenses.length !== 0 && (
+                        <>
+                            <p className="my-2">{budget.name} - Expenses List</p>
+                            <Table>
+                                <thead className="table-primary">
+                                    <tr>
+                                        <th>Expense categories </th>
+                                        <th>Expenses</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {expenses.map(expense => {
+                                        return (
+                                            <tr key = {expense.id}>
+                                                <td>{expense.description}</td>
+                                                <td>{currencyFormatter.format(expense.amount)}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                    <tr className="fst-italic fw-bold">
+                                        <td>Total</td>
+                                        <td>{currencyFormatter.format(Total_expenses)}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </>)
+                    }
+                </div>
            )
         })}        
-        {/* <p className="my-2">Budget Name - blablabla</p> */}
-
-        {/* <Table >
-            <thead className="table-primary">
-                <tr>
-                    <th>Expense categories </th>
-                    <th>Expenses</th>
-                    <th>Remaining Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-            </tbody>
-        </Table> */}
     </Container>
   )
 }
