@@ -6,6 +6,7 @@ import AddExpenseModal from "./components/AddExpenseModal"
 import ViewExpensesModal from "./components/ViewExpensesModal"
 import TotalBudgetCard from "./components/TotalBudgetCard"
 import PrintModal from "./components/PrintModal"
+import PrintCSV from "./components/PrintCSV"
 import { useState } from "react"
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "./contexts/BudgetsContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -36,6 +37,7 @@ function App() {
               <Button variant="outline-warning" onClick={() => setShowAddBudgetModal(true)}>Add Budget</Button>
               <Button variant="outline-warning" onClick={openAddExpenseModal}>Add Expense</Button>
               <Button variant="outline-warning" onClick={() => setShowPrintModal(true)}><FontAwesomeIcon icon={faPrint} /></Button>
+              <PrintCSV/>
             </Stack>
           </Navbar.Collapse>
         </Container> 
