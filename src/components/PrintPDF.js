@@ -2,10 +2,14 @@ import React from "react"
 import { Container, Table, Stack } from "react-bootstrap"
 import { currencyFormatter } from "../utils"
 
-export default function PrintPDF({title, budgets, getBudgetExpenses}) {
+export default function PrintPDF({title, budgets, getBudgetExpenses,UNCATEGORIZED_BUDGET_ID}) {
     let total_max = 0
     let total_amount = 0
     let total_remain = 0
+
+    const uncategorized = getBudgetExpenses(UNCATEGORIZED_BUDGET_ID).reduce((total, expense) => total + expense.amount, 0)
+    const uncategorized_expense = getBudgetExpenses(UNCATEGORIZED_BUDGET_ID)
+    const uncategorized_total_expense = uncategorized_expense.reduce((total, expense) => total + expense.amount, 0)
 
   return (
     <Container className="mx-2">
@@ -23,7 +27,7 @@ export default function PrintPDF({title, budgets, getBudgetExpenses}) {
         <Table>
             <thead className="table-primary">
                 <tr>
-                    <th>Budget categories</th>
+                    <th>Budget Categories</th>
                     <th>Budget</th>
                     <th>Expenses</th>
                     <th>Remaining Balance</th>
@@ -44,11 +48,17 @@ export default function PrintPDF({title, budgets, getBudgetExpenses}) {
                         </tr>
                     )
                 })}
+                <tr>
+                    <td>Uncategorized</td>
+                    <td>Undecided</td>
+                    <td>{currencyFormatter.format(uncategorized)}</td>
+                    <td>{currencyFormatter.format(uncategorized)}</td>
+                </tr>
                 <tr className="fst-italic fw-bold">
                     <td>Total</td>
                     <td>{currencyFormatter.format(total_max)}</td>
-                    <td>{currencyFormatter.format(total_amount)}</td>
-                    <td>{currencyFormatter.format(total_remain)}</td>
+                    <td>{currencyFormatter.format(total_amount + uncategorized)}</td>
+                    <td>{currencyFormatter.format(total_remain + uncategorized)}</td>
                 </tr>
             </tbody>
         </Table>
@@ -86,7 +96,35 @@ export default function PrintPDF({title, budgets, getBudgetExpenses}) {
                     }
                 </div>
            )
-        })}        
+        })}   
+        
+        {uncategorized_expense.length !== 0 && (
+            <>
+                <p className="my-2">Uncategorized Expense List</p>
+                <Table>
+                    <thead className="table-primary">
+                        <tr>
+                            <th>Expense categories </th>
+                            <th>Expenses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {uncategorized_expense.map(expense => {
+                            return (
+                                <tr key = {expense.id}>
+                                    <td>{expense.description}</td>
+                                    <td>{currencyFormatter.format(expense.amount)}</td>
+                                </tr>
+                            )
+                        })}
+                        <tr className="fst-italic fw-bold">
+                            <td>Total</td>
+                            <td>{currencyFormatter.format(uncategorized_total_expense)}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </>
+        )}
     </Container>
   )
 }

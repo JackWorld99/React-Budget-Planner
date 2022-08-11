@@ -1,6 +1,6 @@
 import { Form, Modal, Button } from "react-bootstrap"
 import React, { useRef, useState } from "react"
-import { useBudgets } from "../contexts/BudgetsContext"
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetsContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import ReactToPrint from "react-to-print"
@@ -26,7 +26,7 @@ export default function PrintModal({ show, handleClose }) {
                          <ReactToPrint trigger={() => <Button onClick={(e) => {e.preventDefault()}} variant="primary"><FontAwesomeIcon icon={faPrint} /></Button>} content={() => componentRef} />                   
                          <div style={{ display: "none" }}>
                             <div ref={(el) => (componentRef = el)}>
-                                <PrintPDF title={title} budgets={budgets} getBudgetExpenses={getBudgetExpenses} />
+                                <PrintPDF title={title} budgets={budgets} getBudgetExpenses={getBudgetExpenses} UNCATEGORIZED_BUDGET_ID={UNCATEGORIZED_BUDGET_ID}/>
                             </div>
                         </div>
                     </div>
