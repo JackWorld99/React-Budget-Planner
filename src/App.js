@@ -36,8 +36,12 @@ function App() {
             <Stack direction="horizontal" gap="2">
               <Button variant="outline-warning" onClick={() => setShowAddBudgetModal(true)}>Add Budget</Button>
               <Button variant="outline-warning" onClick={openAddExpenseModal}>Add Expense</Button>
-              <Button variant="outline-warning" onClick={() => setShowPrintModal(true)}><FontAwesomeIcon icon={faPrint} /></Button>
-              <PrintCSV/>
+              { (budgets.length !== 0 || getBudgetExpenses(UNCATEGORIZED_BUDGET_ID).length !== 0) && ( 
+                <>
+                  <Button variant="outline-warning" onClick={() => setShowPrintModal(true)}><FontAwesomeIcon icon={faPrint} /></Button>
+                  <PrintCSV/>
+                </>
+              )}
             </Stack>
           </Navbar.Collapse>
         </Container> 

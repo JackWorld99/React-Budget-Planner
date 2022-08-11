@@ -33,7 +33,11 @@ export default function PrintCSV() {
 
         return data.push({ budget_categories: budget.name, budget: currencyFormatter.format(budget.max), expenses: currencyFormatter.format(amount), remaining_balance: currencyFormatter.format(budget.max - amount)})
     })
-    data.push({budget_categories: "Uncategorized", budget: "Undecided", expenses: currencyFormatter.format(uncategorized), remaining_balance: currencyFormatter.format(uncategorized)})
+
+    if(uncategorized_expense.length !== 0){
+      data.push({budget_categories: "Uncategorized", budget: "Undecided", expenses: currencyFormatter.format(uncategorized), remaining_balance: currencyFormatter.format(uncategorized)})
+    }
+    
     data.push({budget_categories: "Total", budget: currencyFormatter.format(total_max), expenses: currencyFormatter.format(total_amount + uncategorized), remaining_balance: currencyFormatter.format(total_remain + uncategorized)})
     data.push({})
 

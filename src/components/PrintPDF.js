@@ -48,12 +48,14 @@ export default function PrintPDF({title, budgets, getBudgetExpenses,UNCATEGORIZE
                         </tr>
                     )
                 })}
-                <tr>
-                    <td>Uncategorized</td>
-                    <td>Undecided</td>
-                    <td>{currencyFormatter.format(uncategorized)}</td>
-                    <td>{currencyFormatter.format(uncategorized)}</td>
-                </tr>
+                {uncategorized_expense.length !== 0 && (
+                    <tr>
+                        <td>Uncategorized</td>
+                        <td>Undecided</td>
+                        <td>{currencyFormatter.format(uncategorized)}</td>
+                        <td>{currencyFormatter.format(uncategorized)}</td>
+                    </tr>
+                )}
                 <tr className="fst-italic fw-bold">
                     <td>Total</td>
                     <td>{currencyFormatter.format(total_max)}</td>
