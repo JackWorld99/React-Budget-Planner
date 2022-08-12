@@ -70,6 +70,6 @@ export default function PrintCSV() {
     }
       
     return (
-    <CSVLink data={data} headers={headers}><Button variant="outline-warning"><FontAwesomeIcon icon={faFileCsv} /></Button></CSVLink>
+    <CSVLink data={data} headers={headers} filename={"budget-report.csv"}><Button variant="outline-warning"><FontAwesomeIcon icon={faFileCsv} /></Button></CSVLink>
   )
 }
