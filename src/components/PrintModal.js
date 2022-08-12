@@ -23,7 +23,7 @@ export default function PrintModal({ show, handleClose }) {
                         <Form.Control onChange={(e) => setTitle(e.target.value)} type="text"/>
                     </Form.Group>
                     <div className="d-flex justify-content-end">
-                         <ReactToPrint trigger={() => <Button onClick={(e) => {e.preventDefault()}} variant="primary"><FontAwesomeIcon icon={faPrint} /></Button>} content={() => componentRef} />                   
+                         <ReactToPrint trigger={() => <Button onClick={(e) => {e.preventDefault()}} variant="primary"><FontAwesomeIcon icon={faPrint} /></Button>} content={() => componentRef} onAfterPrint={()=>handleClose()} />                   
                          <div style={{ display: "none" }}>
                             <div ref={(el) => (componentRef = el)}>
                                 <PrintPDF title={title} budgets={budgets} getBudgetExpenses={getBudgetExpenses} UNCATEGORIZED_BUDGET_ID={UNCATEGORIZED_BUDGET_ID}/>
