@@ -6,7 +6,7 @@
 ---
 
 ### 🔎 What is this app for?
-Do you or your business often go over budget with unnecessary spending, leading to the dilemma of interrupted cash flow? This is an application that wants to help you know exactly where your money is being spent. Knowing where every pound is spent is an essential step towards getting out of debt or getting your company's performance up to scratch. Good planning and management can effectively prevent companies or individuals from disrupting the flow of funds and leading to bankruptcy. To avoid these things happening we must prepare in advance, set a budget in advance, and stick to it.
+Do you or your business often go over budget with unnecessary spending, leading to the dilemma of interrupted cash flow? It's an application that helps you to know exactly where your money is being spent. Knowing where every pound is spent is an essential step towards getting out of debt or getting your company's performance up to scratch. Good planning and management can effectively prevent companies or individuals from disrupting the flow of funds and leading to bankruptcy. To avoid these things happening we must prepare in advance, set a budget in advance, and stick to it.
 
 #### 🎉 This application enables you to:
 1. Set a budget in advance
