@@ -34,6 +34,10 @@ export const BudgetsProvider = ({children}) => {
     })
    }
 
+   function editBudget({ id, name, max }){
+    setBudgets(budgets.map(budget => budget.id === id ? {...budget, name: name, max: max } : budget))
+   }
+
    function deleteBudget({id}){
     setExpenses(prevExpenses => {
         return prevExpenses.filter(expense => expense.budgetId !== id)
@@ -57,6 +61,6 @@ export const BudgetsProvider = ({children}) => {
    }
    
     return (
-        <BudgetContext.Provider value={{budgets, expenses, getBudgetExpenses, addExpense, addBudget, deleteBudget, deleteExpense}}>{children}</BudgetContext.Provider>
+        <BudgetContext.Provider value={{budgets, expenses, getBudgetExpenses, addExpense, addBudget, editBudget, deleteBudget, deleteExpense}}>{children}</BudgetContext.Provider>
     )
 }
